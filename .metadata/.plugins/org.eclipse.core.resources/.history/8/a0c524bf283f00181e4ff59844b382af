@@ -1,0 +1,8 @@
+package com.jihane.models;
+import com.jihane.models.Arc;
+import com.jihane.models.Noeud;
+
+
+public class Graphe {
+
+}

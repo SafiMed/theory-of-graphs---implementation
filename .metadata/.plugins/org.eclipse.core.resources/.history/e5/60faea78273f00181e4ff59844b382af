@@ -1,0 +1,15 @@
+package com.jihane.models;
+
+public class Noeud {
+	private int id;
+	private String nom;
+
+
+	public Noeud(int id, String nom) {
+		super();
+		this.id = id;
+		this.nom = nom;
+	}
+	
+	
+}
