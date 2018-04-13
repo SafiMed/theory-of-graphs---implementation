@@ -118,8 +118,7 @@ public class Main extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				Graphe graphe = new Graphe(arcs, noeuds);
 				AlgorithmeDijkstra ad = new AlgorithmeDijkstra(graphe);
-				ad.execute(noeuds.get(0));
-				System.out.println(ad.getPath(noeuds.get(2)));
+				System.out.println(ad.getPath(noeuds.get(3)));
 			}
 		});
 		btnNewButton.setBounds(328, 282, 97, 25);

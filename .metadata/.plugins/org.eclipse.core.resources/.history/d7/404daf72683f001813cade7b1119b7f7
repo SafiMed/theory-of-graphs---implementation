@@ -1,0 +1,34 @@
+package com.jihane.algorithms;
+
+import com.jihane.models.Arc;
+import com.jihane.models.Graphe;
+import com.jihane.models.Noeud;
+
+public class AlgorithmeDijkstra {
+	private Graphe graphe;
+
+	public AlgorithmeDijkstra(Graphe graphe) {
+		super();
+		this.graphe = graphe;
+	}
+
+    public Graphe getGraphe() {
+		return graphe;
+	}
+
+
+	public void setGraphe(Graphe graphe) {
+		this.graphe = graphe;
+	}
+
+
+	private int getDistance(Noeud source, Noeud destinantion) {
+        for (Arc arc : this.graphe. {
+            if (edge.getSource().equals(node)
+                    && edge.getDestination().equals(target)) {
+                return edge.getWeight();
+            }
+        }
+        throw new RuntimeException("Should not happen");
+    }
+}

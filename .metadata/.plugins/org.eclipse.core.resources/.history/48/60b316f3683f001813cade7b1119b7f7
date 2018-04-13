@@ -1,0 +1,45 @@
+package com.jihane.algorithms;
+
+import java.util.LinkedList;
+
+import com.jihane.models.Arc;
+import com.jihane.models.Graphe;
+import com.jihane.models.Noeud;
+
+public class AlgorithmeDijkstra {
+	private Graphe graphe;
+
+	public AlgorithmeDijkstra(Graphe graphe) {
+		super();
+		this.graphe = graphe;
+	}
+
+    public Graphe getGraphe() {
+		return graphe;
+	}
+
+
+	public void setGraphe(Graphe graphe) {
+		this.graphe = graphe;
+	}
+
+	private int getDistance(Noeud source, Noeud destination) {
+        for (Arc arc : this.getGraphe().getArcs()) {
+            if (arc.getSource().equals(source) && arc.getDestination().equals(destination)) {
+                return arc.getPoids();
+            }
+        }
+        throw new RuntimeException("Should not happen");
+    }
+	
+    private LinkedList<Noeud> getVoisions(Noeud node) {
+    	LinkedList<Noeud> voisions = new LinkedList<Noeud>();
+        for (Arc arc : arcs) {
+            if (edge.getSource().equals(node)
+                    && !isSettled(edge.getDestination())) {
+                neighbors.add(edge.getDestination());
+            }
+        }
+        return neighbors;
+    }
+}

@@ -1,0 +1,7 @@
+package com.jihane.algorithms;
+
+import com.jihane.models.Graphe;
+
+public class AlgorithmeDijkstra {
+	private Graphe graphe;
+}

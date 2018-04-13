@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import com.jihane.algorithms.AlgorithmeDijkstra;
 import com.jihane.models.Arc;
 import com.jihane.models.Graphe;
 import com.jihane.models.Noeud;
@@ -116,10 +115,7 @@ public class Main extends JFrame{
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Graphe graphe = new Graphe(arcs, noeuds);
-				AlgorithmeDijkstra ad = new AlgorithmeDijkstra(graphe);
-				ad.execute(noeuds.get(0));
-				System.out.println(ad.getPath(noeuds.get(2)));
+				Graphe graphe = new Graphe();
 			}
 		});
 		btnNewButton.setBounds(328, 282, 97, 25);
