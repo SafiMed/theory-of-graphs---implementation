@@ -1,0 +1,31 @@
+package com.jihane.gui;
+
+import java.util.LinkedList;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import com.jihane.models.Noeud;
+
+public class ManageArcs extends JFrame {
+
+	JTable table = new JTable(new DefaultTableModel(new Object[]{"Arc ID", "Poids", "Source", "Destination"}, 0));
+	DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+	
+	/**
+	 * Create the frame.
+	 */
+	public ManageArcs(LinkedList<Noeud> noeuds, int nombreArcs) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 512, 427);
+
+		getContentPane().setLayout(null);
+		JScrollPane js = new JScrollPane(table);
+		js.setBounds(0, 42, 494, 292);
+		getContentPane().add(js);
+	}
+
+}

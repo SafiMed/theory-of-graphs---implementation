@@ -1,0 +1,44 @@
+package com.jihane.gui;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class ManageNoeud extends JFrame {
+
+	JTable table = new JTable(new DefaultTableModel(new Object[]{"Noeud ID", "Nom"}, 0));
+	DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+	public ManageNoeud(int nombreNoeuds) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 512, 427);
+		this.dessinerTable(nombreNoeuds);
+		getContentPane().setLayout(null);
+		JScrollPane js = new JScrollPane(table);
+		js.setBounds(0, 42, 494, 292);
+		getContentPane().add(js);
+		
+		JButton btnNewButton = new JButton("Valider");
+		btnNewButton.setBounds(0, 335, 494, 45);
+		getContentPane().add(btnNewButton);
+		
+		JLabel lblNommezLesNoeuds = new JLabel("Nommez les noeuds");
+		lblNommezLesNoeuds.setBounds(12, 13, 133, 16);
+		getContentPane().add(lblNommezLesNoeuds);
+	}
+	
+	public void dessinerTable(int nombreNoeuds) {
+		for(int i=1; i<=nombreNoeuds; i++) {
+			model.addRow(new Object[]{i, ""});
+		}
+	}
+	
+	public void nommerNoeuds(JTable table, int nombreNoeuds) {
+		for(int count; count<model.getRowCount(); count++) {
+			
+		}
+	}
+}

@@ -4,14 +4,22 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import com.jihane.models.Noeud;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.awt.event.ActionEvent;
 
-public class Main {
+public class Main extends JFrame{
 
-	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	JFrame frame;
+	private JTextField nombreNoeudsField;
+	private JTextField nombreArcsField;
+
+	LinkedList<Noeud> noeuds = new LinkedList<Noeud>();
 
 	/**
 	 * Launch the application.
@@ -37,6 +45,11 @@ public class Main {
 		initialize();
 	}
 
+	public Main(LinkedList<Noeud> noeuds) {
+		this.noeuds = noeuds;
+		initialize();
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -46,30 +59,46 @@ public class Main {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(309, 78, 116, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		nombreNoeudsField = new JTextField();
+		nombreNoeudsField.setBounds(309, 78, 116, 22);
+		frame.getContentPane().add(nombreNoeudsField);
+		nombreNoeudsField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Saisissez le nombre de Noeuds :");
 		lblNewLabel.setBounds(45, 81, 200, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton btnValider = new JButton("Valider");
-		btnValider.setBounds(547, 77, 97, 25);
-		frame.getContentPane().add(btnValider);
+		JButton btnValiderNoeuds = new JButton("Valider");
+		btnValiderNoeuds.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int nombreNoeuds = Integer.parseInt(nombreNoeudsField.getText());
+				
+				new ManageNoeuds(nombreNoeuds).setVisible(true);
+				frame.setVisible(false);
+			}
+		});
+		btnValiderNoeuds.setBounds(547, 77, 97, 25);
+		frame.getContentPane().add(btnValiderNoeuds);
 		
 		JLabel lblSaisissezLeNombre = new JLabel("Saisissez le nombre d'arcs :");
 		lblSaisissezLeNombre.setBounds(45, 134, 200, 16);
 		frame.getContentPane().add(lblSaisissezLeNombre);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(309, 131, 116, 22);
-		frame.getContentPane().add(textField_1);
+		nombreArcsField = new JTextField();
+		nombreArcsField.setColumns(10);
+		nombreArcsField.setBounds(309, 131, 116, 22);
+		frame.getContentPane().add(nombreArcsField);
 		
-		JButton button = new JButton("Valider");
-		button.setBounds(547, 130, 97, 25);
-		frame.getContentPane().add(button);
+		JButton btnValiderArcs = new JButton("Valider");
+		btnValiderArcs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int nombreArcs = Integer.parseInt(nombreArcsField.getText());
+				
+				new ManageArcs(noeuds, nombreArcs).setVisible(true);
+				frame.setVisible(false);
+			}
+		});
+		btnValiderArcs.setBounds(547, 130, 97, 25);
+		frame.getContentPane().add(btnValiderArcs);
 	}
 }

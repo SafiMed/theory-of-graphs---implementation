@@ -7,8 +7,12 @@ public class Arc {
 	private int poids;
 	private Noeud source;
 	private Noeud destination;
-	private boolean orientation;
+	private boolean orientation = false;
 
+
+	public Arc() {
+		super();
+	}
 
 	public Arc(int id, int poids, Noeud source, Noeud destination, boolean orientation) {
 		super();

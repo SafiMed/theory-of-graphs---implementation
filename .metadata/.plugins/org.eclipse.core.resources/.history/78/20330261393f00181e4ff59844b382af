@@ -1,0 +1,33 @@
+package com.jihane.gui;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+
+public class ManageNoeud extends JFrame {
+
+	JTable table = new JTable(new DefaultTableModel(new Object[]{"Noeud ID", "Nom"}, 0));
+
+	public ManageNoeud(int nombreNoeuds) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 365);
+		this.dessinerTable(nombreNoeuds);
+		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		JScrollPane js = new JScrollPane(table);
+		getContentPane().add(js);
+		
+		JButton btnNewButton = new JButton("New button");
+		getContentPane().add(btnNewButton);
+	}
+	
+	public void dessinerTable(int nombreNoeuds) {
+		DefaultTableModel model = (DefaultTableModel) table.getModel();
+		for(int i=1; i<=nombreNoeuds; i++) {
+			model.addRow(new Object[]{i, ""});
+		}
+	}
+}

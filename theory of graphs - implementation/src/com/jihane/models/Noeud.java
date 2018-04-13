@@ -2,9 +2,12 @@ package com.jihane.models;
 
 
 public class Noeud {
-	private int id;
-	private String nom;
+	public int id;
+	public String nom;
 
+	public Noeud() {
+		super();
+	}
 
 	public Noeud(int id, String nom) {
 		super();
@@ -29,5 +32,10 @@ public class Noeud {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	@Override
+	public String toString() {
+		return "Noeud [id=" + id + ", nom=" + nom + "]";
 	}
 }
