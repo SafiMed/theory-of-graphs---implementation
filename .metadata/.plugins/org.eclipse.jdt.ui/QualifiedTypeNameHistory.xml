@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="com.jihane.models.Graphe"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="javax.swing.JTable"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<fullyQualifiedTypeName name="java.awt.Window"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="com.jihane.gui.Main"/>
+<fullyQualifiedTypeName name="com.jihane.gui.ManageNoeud"/>
+<fullyQualifiedTypeName name="com.jihane.models.Noeud"/>
+<fullyQualifiedTypeName name="com.jihane.models.Arc"/>
+</qualifiedTypeNameHistroy>

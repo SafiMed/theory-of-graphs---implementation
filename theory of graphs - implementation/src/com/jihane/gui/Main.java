@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import com.jihane.models.Arc;
 import com.jihane.models.Noeud;
 
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ public class Main extends JFrame{
 	private JTextField nombreArcsField;
 
 	LinkedList<Noeud> noeuds = new LinkedList<Noeud>();
+	LinkedList<Arc> arcs = new LinkedList<Arc>();
 
 	/**
 	 * Launch the application.
@@ -45,9 +47,17 @@ public class Main extends JFrame{
 		initialize();
 	}
 
-	public Main(LinkedList<Noeud> noeuds) {
+	public Main(LinkedList<Noeud> noeuds, int nombreNoeuds) {
 		this.noeuds = noeuds;
 		initialize();
+		nombreNoeudsField.setText(Integer.toString(nombreNoeuds));
+	}
+
+	public Main(LinkedList<Arc> arcs, int nombreNoeuds, int nombreArcs) {
+		this.arcs = arcs;
+		initialize();
+		nombreNoeudsField.setText(Integer.toString(nombreNoeuds));
+		nombreArcsField.setText(Integer.toString(nombreArcs));
 	}
 
 	/**

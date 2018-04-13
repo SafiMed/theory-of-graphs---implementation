@@ -11,6 +11,8 @@ import com.jihane.models.Arc;
 import com.jihane.models.Noeud;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManageArcs extends JFrame {
 
@@ -31,6 +33,18 @@ public class ManageArcs extends JFrame {
 		getContentPane().add(js);
 		
 		JButton btnNewButton = new JButton("Valider");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					JFrame frame;
+					Main window = new Main(nommerArcs(table, noeuds, nombreArcs), noeuds.size(), nombreArcs);
+//					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					window.frame.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButton.setBounds(0, 335, 494, 45);
 		getContentPane().add(btnNewButton);
 		
@@ -45,13 +59,16 @@ public class ManageArcs extends JFrame {
 		}
 	}
 	
-	public LinkedList<Arc> nommerArcs(JTable table, int nombreArcs) {
+	public LinkedList<Arc> nommerArcs(JTable table, LinkedList<Noeud> noeuds,  int nombreArcs) {
 		LinkedList<Arc> arcs = new LinkedList<Arc>();
-		for(int count=0; count<model.getRowCount(); count++) {
+		for(int count=0; count<model.getRowCount()-1; count++) {
 			Arc arc = new Arc();
 			arc.setId(Integer.parseInt(model.getValueAt(count, 0).toString()));
 			arc.setPoids(Integer.parseInt(model.getValueAt(count, 1).toString()));
+			arc.setSource(noeuds.get(Integer.parseInt(model.getValueAt(count, 2).toString())));
+			arc.setDestination(noeuds.get(Integer.parseInt(model.getValueAt(count, 3).toString())));
 			arcs.add(arc);
+//			System.out.println("Arc [id=" + Integer.parseInt(model.getValueAt(count, 0).toString()) + ", poids=" + Integer.parseInt(model.getValueAt(count, 1).toString()) + ", source=" + noeuds.get(Integer.parseInt(model.getValueAt(count, 2).toString())).toString() + ", destination=" + noeuds.get(Integer.parseInt(model.getValueAt(count, 3).toString())).toString() + "]");
 		}
 		return arcs;
 	}

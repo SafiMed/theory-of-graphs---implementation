@@ -62,4 +62,10 @@ public class Arc {
 	public void setOrientation(boolean orientation) {
 		this.orientation = orientation;
 	}
+
+	@Override
+	public String toString() {
+		return "Arc [id=" + id + ", poids=" + poids + ", source=" + source + ", destination=" + destination
+				+ ", orientation=" + orientation + "]";
+	}
 }

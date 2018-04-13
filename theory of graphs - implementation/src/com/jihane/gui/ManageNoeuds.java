@@ -33,7 +33,7 @@ public class ManageNoeuds extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					JFrame frame;
-					Main window = new Main(nommerNoeuds(table, nombreNoeuds));
+					Main window = new Main(nommerNoeuds(table, nombreNoeuds), nombreNoeuds);
 //					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
