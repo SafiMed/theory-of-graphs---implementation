@@ -12,8 +12,8 @@ import com.jihane.models.Graphe;
 import com.jihane.models.Noeud;
 
 public class AlgorithmeDijkstra {
-	private Graphe graphe;
 
+	private Graphe graphe;
     private Set<Noeud> settledNodes;
     private Set<Noeud> unSettledNodes;
     private Map<Noeud, Noeud> predecessors;
@@ -44,11 +44,11 @@ public class AlgorithmeDijkstra {
             Noeud node = getMinimum(unSettledNodes);
             settledNodes.add(node);
             unSettledNodes.remove(node);
-            findMinimalDistances(node);
+            trouverDistanceMinimal(node);
         }
     }
  
-    private void findMinimalDistances(Noeud noeud) {
+    private void trouverDistanceMinimal(Noeud noeud) {
         LinkedList<Noeud> adjacentNodes = getVoisions(noeud);
         for (Noeud target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(noeud)
@@ -107,21 +107,21 @@ public class AlgorithmeDijkstra {
             return d;
         }
     }
-    
-    public LinkedList<Noeud> getPath(Noeud target) {
-        LinkedList<Noeud> path = new LinkedList<Noeud>();
+
+    public LinkedList<Noeud> getchemin(Noeud target) {
+        LinkedList<Noeud> chemin = new LinkedList<Noeud>();
         Noeud step = target;
-        // check if a path exists
+        // check if a chemin exists
         if (predecessors.get(step) == null) {
             return null;
         }
-        path.add(step);
+        chemin.add(step);
         while (predecessors.get(step) != null) {
             step = predecessors.get(step);
-            path.add(step);
+            chemin.add(step);
         }
         // Put it into the correct order
-        Collections.reverse(path);
-        return path;
+        Collections.reverse(chemin);
+        return chemin;
     }
 }

@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ManageArcs extends JFrame {
 
@@ -24,9 +25,11 @@ public class ManageArcs extends JFrame {
 	 * Create the frame.
 	 */
 	public ManageArcs(LinkedList<Noeud> noeuds, int nombreArcs) {
+		getContentPane().setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 512, 427);
 		getContentPane().setLayout(null);
+		setLocationRelativeTo(null);
 		this.dessinerTable(nombreArcs);
 		JScrollPane js = new JScrollPane(table);
 		js.setBounds(0, 42, 494, 292);
@@ -39,6 +42,7 @@ public class ManageArcs extends JFrame {
 					JFrame frame;
 					Main window = new Main(nommerArcs(table, noeuds, nombreArcs), noeuds.size(), nombreArcs);
 //					window.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+					setVisible(false);
 					window.frame.setVisible(true);
 				} catch (Exception e1) {
 					e1.printStackTrace();
