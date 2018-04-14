@@ -1,5 +1,0 @@
-package com.jihane.algorithms;
-
-public class AlgorithmeDijkstra {
-	private Graphe graphe;
-}

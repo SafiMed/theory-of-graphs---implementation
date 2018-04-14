@@ -56,8 +56,9 @@ public class ManageNoeuds extends JFrame {
 	}
 	
 	public LinkedList<Noeud> nommerNoeuds(JTable table, int nombreNoeuds) {
+		int count;
 		LinkedList<Noeud> noeuds = new LinkedList<Noeud>();
-		for(int count=0; count<model.getRowCount(); count++) {
+		for(count=0; count<model.getRowCount(); count++) {
 			Noeud noeud = new Noeud();
 			noeud.setId(Integer.parseInt(model.getValueAt(count, 0).toString()));
 			noeud.setNom(model.getValueAt(count, 1).toString());

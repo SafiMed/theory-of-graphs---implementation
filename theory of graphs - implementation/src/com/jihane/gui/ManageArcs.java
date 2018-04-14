@@ -61,14 +61,13 @@ public class ManageArcs extends JFrame {
 	
 	public LinkedList<Arc> nommerArcs(JTable table, LinkedList<Noeud> noeuds,  int nombreArcs) {
 		LinkedList<Arc> arcs = new LinkedList<Arc>();
-		for(int count=0; count<model.getRowCount()-1; count++) {
+		for(int count=0; count<model.getRowCount(); count++) {
 			Arc arc = new Arc();
 			arc.setId(Integer.parseInt(model.getValueAt(count, 0).toString()));
 			arc.setPoids(Integer.parseInt(model.getValueAt(count, 1).toString()));
-			arc.setSource(noeuds.get(Integer.parseInt(model.getValueAt(count, 2).toString())));
-			arc.setDestination(noeuds.get(Integer.parseInt(model.getValueAt(count, 3).toString())));
+			arc.setSource(noeuds.get(Integer.parseInt(model.getValueAt(count, 2).toString())-1));
+			arc.setDestination(noeuds.get(Integer.parseInt(model.getValueAt(count, 3).toString())-1));
 			arcs.add(arc);
-//			System.out.println("Arc [id=" + Integer.parseInt(model.getValueAt(count, 0).toString()) + ", poids=" + Integer.parseInt(model.getValueAt(count, 1).toString()) + ", source=" + noeuds.get(Integer.parseInt(model.getValueAt(count, 2).toString())).toString() + ", destination=" + noeuds.get(Integer.parseInt(model.getValueAt(count, 3).toString())).toString() + "]");
 		}
 		return arcs;
 	}

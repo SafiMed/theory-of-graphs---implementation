@@ -8,14 +8,14 @@
 <fullyQualifiedTypeName name="com.jihane.gui.Main"/>
 <fullyQualifiedTypeName name="com.jihane.gui.ManageNoeud"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="com.jihane.models.Arc"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="com.jihane.models.Noeud"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="com.jihane.models.Arc"/>
 <fullyQualifiedTypeName name="com.jihane.models.Graphe"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="com.jihane.models.Noeud"/>
 <fullyQualifiedTypeName name="com.jihane.algorithms.AlgorithmeDijkstra"/>
 </qualifiedTypeNameHistroy>
