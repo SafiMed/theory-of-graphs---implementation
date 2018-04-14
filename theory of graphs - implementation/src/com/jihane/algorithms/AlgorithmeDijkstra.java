@@ -124,33 +124,4 @@ public class AlgorithmeDijkstra {
         Collections.reverse(path);
         return path;
     }
-    
-//	public static void main(String[] args) {
-//    	Noeud n1 = new Noeud(1, "n1");
-//    	Noeud n2 = new Noeud(1, "n2");
-//    	Noeud n3 = new Noeud(1, "n3");
-//    	Noeud n4 = new Noeud(1, "n4");
-//    	Arc a1 = new Arc(1, 5, n1, n2, false);
-//    	Arc a2 = new Arc(1, 9, n2, n4, false);
-//    	Arc a3 = new Arc(1, 4, n1, n3, false);
-//    	Arc a4 = new Arc(1, 7, n3, n4, false);
-//    
-//    	LinkedList<Noeud> noeuds = new LinkedList<Noeud>();
-//    	noeuds.add(n1);
-//    	noeuds.add(n2);
-//    	noeuds.add(n3);
-//    	noeuds.add(n4);
-//   
-//    	LinkedList<Arc> arcs = new LinkedList<Arc>();
-//    	arcs.add(a1);
-//    	arcs.add(a2);
-//    	arcs.add(a3);
-//    	arcs.add(a4);
-//    	
-//    	Graphe g = new Graphe(arcs, noeuds);
-//		AlgorithmeDijkstra ad = new AlgorithmeDijkstra(g);
-//		ad.execute(n1);
-//		System.out.println(ad.getPath(n4));
-//    	
-//    }
 }
