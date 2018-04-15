@@ -163,8 +163,8 @@ public class Main extends JFrame{
 		btnValiderNoeuds.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int nombreNoeuds = Integer.parseInt(nombreNoeudsField.getText());
-				for(int i=1; i<=nombreNoeuds; i++) {
-						noeuds.add(new Noeud(i, Integer.toString(i)));
+				for(int i=0; i<=nombreNoeuds; i++) {
+						
 				}
 //				new ManageNoeuds(nombreNoeuds).setVisible(true);
 //				frame.setVisible(false);

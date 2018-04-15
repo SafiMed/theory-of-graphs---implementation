@@ -21,4 +21,5 @@
 <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.jihane.models.Noeud"/>
+<fullyQualifiedTypeName name="com.jihane.algorithms.KruskalAlgorithm"/>
 </qualifiedTypeNameHistroy>
