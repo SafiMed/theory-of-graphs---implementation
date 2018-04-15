@@ -68,7 +68,4 @@ public class Arc {
 		return "Arc [id=" + id + ", poids=" + poids + ", source=" + source + ", destination=" + destination
 				+ ", orientation=" + orientation + "]";
 	}
-	public String toPath() {
-		return "-->Arc("+id+")";
-	}
 }

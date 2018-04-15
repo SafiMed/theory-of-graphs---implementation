@@ -6,11 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import com.jihane.algorithms.AlgorithmeDijkstra;
+import com.jihane.algorithms.KruskalAlgorithm;
 import com.jihane.models.Arc;
 import com.jihane.models.Graphe;
 import com.jihane.models.Noeud;
 
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JTextArea;
-import java.awt.FlowLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Font;
@@ -27,6 +28,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import java.awt.Window.Type;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main extends JFrame{
 
@@ -34,6 +37,8 @@ public class Main extends JFrame{
 	private JTextField nombreNoeudsField;
 	private JTextField nombreArcsField;
 
+	JComboBox cbDjikstraDebut;
+	JComboBox cbDjikstraFin;
 	static LinkedList<Noeud> noeuds = new LinkedList<Noeud>();
 	static LinkedList<Arc> arcs = new LinkedList<Arc>();
 
@@ -41,7 +46,7 @@ public class Main extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+			EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Main window = new Main();
@@ -80,7 +85,6 @@ public class Main extends JFrame{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setType(Type.UTILITY);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(255, 255, 255));
 		frame.setBounds(100, 100, 1093, 750);
@@ -91,7 +95,7 @@ public class Main extends JFrame{
 		panel.setBounds(0, 0, 444, 703);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(444, 56, 643, 131);
 		panel_2.setBackground(new Color(110, 89, 222));
@@ -129,11 +133,17 @@ public class Main extends JFrame{
 		panel_2.add(nombreArcsField);
 		nombreArcsField.setColumns(10);
 		
-		JComboBox cbDjikstraDebut = new JComboBox();
+		cbDjikstraDebut = new JComboBox();
+		cbDjikstraDebut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				getArray(Integer.parseInt(nombreNoeudsField.getText()));
+			}
+		});
 		cbDjikstraDebut.setBounds(12, 14, 122, 22);
 		panel_1.add(cbDjikstraDebut);
 		
-		JComboBox cbDjikstraFin = new JComboBox();
+		cbDjikstraFin = new JComboBox();
 		cbDjikstraFin.setBounds(146, 14, 122, 22);
 		panel_1.add(cbDjikstraFin);
 
@@ -143,7 +153,7 @@ public class Main extends JFrame{
 		btnValiderArcs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int nombreArcs = Integer.parseInt(nombreArcsField.getText());
-				getArray(nombreArcs, cbDjikstraDebut, cbDjikstraFin);
+
 				new ManageArcs(noeuds, nombreArcs).setVisible(true);
 				frame.setVisible(false);
 			}
@@ -151,7 +161,6 @@ public class Main extends JFrame{
 		btnValiderNoeuds.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int nombreNoeuds = Integer.parseInt(nombreNoeudsField.getText());
-				
 				new ManageNoeuds(nombreNoeuds).setVisible(true);
 				frame.setVisible(false);
 			}
@@ -183,27 +192,38 @@ public class Main extends JFrame{
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(new Color(85, 55, 118));
-		panel_3.setBounds(12, 256, 420, 50);
+		panel_3.setBounds(12, 279, 420, 50);
 		panel.add(panel_3);
-		
-		JButton btnKruskal = new JButton("Kruskal");
-		btnKruskal.setBounds(280, 13, 128, 25);
-		panel_3.add(btnKruskal);
-		btnDjikstra.addActionListener(new ActionListener() {
+		JButton button = new JButton("Kruskal");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Graphe graphe = new Graphe(arcs, noeuds);
+				KruskalAlgorithm ks = new KruskalAlgorithm(graphe);
+				logField.setText(" **** Kruskal : ");
+				for (Arc arc : ks.execute()) {
+					logField.setText(logField.getText() + arc.toPath());
+				}
+
+			}
+		});
+		button.setBounds(138, 11, 128, 25);
+		panel_3.add(button);
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Graphe graphe = new Graphe(arcs, noeuds);
 				AlgorithmeDijkstra ad = new AlgorithmeDijkstra(graphe);
-				ad.execute(noeuds.get(0));
-				logField.setText(ad.getPath(noeuds.get(7)).toString());
+				Noeud source = noeuds.get(Integer.parseInt(cbDjikstraDebut.getSelectedItem().toString())-1);
+				Noeud destination = noeuds.get(Integer.parseInt(cbDjikstraFin.getSelectedItem().toString())-1);
+				logField.setText(ad.plusCourtChemin(source, destination));
 			}
 		});
 	}
 	
-	public void getArray(int nbr, JComboBox cbDjikstraDebut, JComboBox cbDjikstraFin) {
+	public void getArray(int nbr) {
 		ArrayList<Integer> arl = new ArrayList<Integer>();
-		for(int i=1; i<nbr; i++)	arl.add(i);
-		for (int i = 0; i < arl.size(); i++)	cbDjikstraDebut.addItem(arl.get(i));
-		for (int i = 0; i < arl.size(); i++)	cbDjikstraFin.addItem(arl.get(i));
+		for(int i=1; i<=nbr; i++)	arl.add(i);
+		this.cbDjikstraDebut.setModel(new DefaultComboBoxModel(arl.toArray()));
+		this.cbDjikstraFin.setModel(new DefaultComboBoxModel(arl.toArray()));
 	}
 
 	public LinkedList<Noeud> getNoeuds() {

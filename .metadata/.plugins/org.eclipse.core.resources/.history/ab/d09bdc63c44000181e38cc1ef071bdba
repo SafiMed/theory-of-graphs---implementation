@@ -11,6 +11,7 @@ import com.jihane.models.Graphe;
 import com.jihane.models.Noeud;
 
 import javax.swing.JLabel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import java.awt.Window.Type;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main extends JFrame{
 
@@ -34,6 +37,8 @@ public class Main extends JFrame{
 	private JTextField nombreNoeudsField;
 	private JTextField nombreArcsField;
 
+	JComboBox cbDjikstraDebut;
+	JComboBox cbDjikstraFin;
 	static LinkedList<Noeud> noeuds = new LinkedList<Noeud>();
 	static LinkedList<Arc> arcs = new LinkedList<Arc>();
 
@@ -129,11 +134,17 @@ public class Main extends JFrame{
 		panel_2.add(nombreArcsField);
 		nombreArcsField.setColumns(10);
 		
-		JComboBox cbDjikstraDebut = new JComboBox();
+		cbDjikstraDebut = new JComboBox();
+		cbDjikstraDebut.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				getArray(Integer.parseInt(nombreNoeudsField.getText()));
+			}
+		});
 		cbDjikstraDebut.setBounds(12, 14, 122, 22);
 		panel_1.add(cbDjikstraDebut);
 		
-		JComboBox cbDjikstraFin = new JComboBox();
+		cbDjikstraFin = new JComboBox();
 		cbDjikstraFin.setBounds(146, 14, 122, 22);
 		panel_1.add(cbDjikstraFin);
 
@@ -143,7 +154,6 @@ public class Main extends JFrame{
 		btnValiderArcs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int nombreArcs = Integer.parseInt(nombreArcsField.getText());
-				getArray(nombreArcs, cbDjikstraDebut, cbDjikstraFin);
 
 				new ManageArcs(noeuds, nombreArcs).setVisible(true);
 				frame.setVisible(false);
@@ -194,17 +204,22 @@ public class Main extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				Graphe graphe = new Graphe(arcs, noeuds);
 				AlgorithmeDijkstra ad = new AlgorithmeDijkstra(graphe);
-				ad.execute(noeuds.get(0));
-				logField.setText(ad.getPath(noeuds.get(7)).toString());
+				Noeud source = noeuds.get(Integer.parseInt(cbDjikstraDebut.getSelectedItem().toString())-1);
+				Noeud destination = noeuds.get(Integer.parseInt(cbDjikstraFin.getSelectedItem().toString())-1);
+				logField.setText(ad.plusCourtChemin(source, destination));
 			}
 		});
 	}
 	
-	public void getArray(int nbr, JComboBox cbDjikstraDebut, JComboBox cbDjikstraFin) {
+	public void getArray(int nbr) {
 		ArrayList<Integer> arl = new ArrayList<Integer>();
-		for(int i=1; i<nbr; i++)	arl.add(i);
-		for (int i = 0; i < arl.size(); i++)	cbDjikstraDebut.addItem(arl.get(i));
-		for (int i = 0; i < arl.size(); i++)	cbDjikstraFin.addItem(arl.get(i));
+		for(int i=1; i<=nbr; i++)	arl.add(i);
+		this.cbDjikstraDebut.setModel(new DefaultComboBoxModel(arl.toArray()));
+		this.cbDjikstraFin.setModel(new DefaultComboBoxModel(arl.toArray()));
+//		for (int i=0; i<arl.size(); i++) {
+//			this.cbDjikstraDebut.addItem(arl.get(i).toString());
+//			this.cbDjikstraFin.addItem(arl.get(i).toString());
+//		}
 	}
 
 	public LinkedList<Noeud> getNoeuds() {

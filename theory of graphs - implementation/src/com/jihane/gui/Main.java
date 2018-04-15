@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import com.jihane.algorithms.AlgorithmeDijkstra;
+import com.jihane.algorithms.KruskalAlgorithm;
 import com.jihane.models.Arc;
 import com.jihane.models.Graphe;
 import com.jihane.models.Noeud;
@@ -197,9 +198,21 @@ public class Main extends JFrame{
 		panel_3.setBounds(12, 256, 420, 50);
 		panel.add(panel_3);
 		
-		JButton btnKruskal = new JButton("Kruskal");
-		btnKruskal.setBounds(280, 13, 128, 25);
-		panel_3.add(btnKruskal);
+		JButton button = new JButton("Kruskal");
+		button.setBounds(280, 13, 128, 25);
+		button.setBounds(138, 11, 128, 25);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Graphe graphe = new Graphe(arcs, noeuds);
+				KruskalAlgorithm ks = new KruskalAlgorithm(graphe);
+				logField.setText(" **** Kruskal : ");
+				for (Arc arc : ks.execute()) {
+					logField.setText(logField.getText() + arc.toPath());
+				}
+
+			}
+		});
+		panel_3.add(button);
 		btnDjikstra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Graphe graphe = new Graphe(arcs, noeuds);
