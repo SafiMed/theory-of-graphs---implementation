@@ -204,8 +204,9 @@ public class Main extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				Graphe graphe = new Graphe(arcs, noeuds);
 				AlgorithmeDijkstra ad = new AlgorithmeDijkstra(graphe);
-				ad.execute(noeuds.get(Integer.parseInt(cbDjikstraDebut.getSelectedItem().toString())));
-				logField.setText(ad.getchemin(noeuds.get(Integer.parseInt(cbDjikstraFin.getSelectedItem().toString()))).toString());
+				Noeud source = noeuds.get(Integer.parseInt(cbDjikstraDebut.getSelectedItem().toString())-1);
+				Noeud destination = noeuds.get(Integer.parseInt(cbDjikstraFin.getSelectedItem().toString())-1);
+				logField.setText(ad.plusCourtChemin(source, destination));
 			}
 		});
 	}

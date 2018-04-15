@@ -6,6 +6,12 @@
 		<item value="327" key="y"/>
 		<item value="375" key="height"/>
 	</section>
+	<section name="org.eclipse.wb.internal.core.model.property.order.ReorderDialog">
+		<item value="619" key="x"/>
+		<item value="682" key="width"/>
+		<item value="278" key="y"/>
+		<item value="473" key="height"/>
+	</section>
 	<section name="org.eclipse.wb.internal.core.model.property.editor.string.StringPropertyDialog">
 		<item value="610" key="x"/>
 		<item value="700" key="width"/>

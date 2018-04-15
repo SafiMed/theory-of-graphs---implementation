@@ -14,9 +14,8 @@ import com.jihane.models.Noeud;
 public class AlgorithmeDijkstra {
 
 	private Graphe graphe;
-    private Set<Noeud> settledNodes;
-    private Set<Noeud> unSettledNodes;
-    private Map<Noeud, Noeud> predecessors;
+    private Set<Noeud> noeudsInclus, noeudsExclus;
+    private Map<Noeud, Noeud> predecesseurs;
     private Map<Noeud, Integer> distance;
    
 	public AlgorithmeDijkstra(Graphe graphe) {
@@ -32,31 +31,16 @@ public class AlgorithmeDijkstra {
 	public void setGraphe(Graphe graphe) {
 		this.graphe = graphe;
 	}
-
-    public void execute(Noeud source) {
-        settledNodes = new HashSet<Noeud>();
-        unSettledNodes = new HashSet<Noeud>();
-        distance = new HashMap<Noeud, Integer>();
-        predecessors = new HashMap<Noeud, Noeud>();
-        distance.put(source, 0);
-        unSettledNodes.add(source);
-        while (unSettledNodes.size() > 0) {
-            Noeud node = getMinimum(unSettledNodes);
-            settledNodes.add(node);
-            unSettledNodes.remove(node);
-            trouverDistanceMinimal(node);
-        }
-    }
  
     private void trouverDistanceMinimal(Noeud noeud) {
         LinkedList<Noeud> adjacentNodes = getVoisions(noeud);
-        for (Noeud target : adjacentNodes) {
-            if (getShortestDistance(target) > getShortestDistance(noeud)
-                    + getDistance(noeud, target)) {
-                distance.put(target, getShortestDistance(noeud)
-                        + getDistance(noeud, target));
-                predecessors.put(target, noeud);
-                unSettledNodes.add(target);
+        for (Noeud destination : adjacentNodes) {
+            if (getPlusCourteDistance(destination) > getPlusCourteDistance(noeud)
+                    + getDistance(noeud, destination)) {
+                distance.put(destination, getPlusCourteDistance(noeud)
+                        + getDistance(noeud, destination));
+                predecesseurs.put(destination, noeud);
+                noeudsExclus.add(destination);
             }
         }
 
@@ -68,13 +52,13 @@ public class AlgorithmeDijkstra {
                 return arc.getPoids();
             }
         }
-        throw new RuntimeException("Should not happen");
+        return -1; // Retourner -1 en cas d'erreur
     }
 	
     private LinkedList<Noeud> getVoisions(Noeud noeud) {
     	LinkedList<Noeud> voisions = new LinkedList<Noeud>();
         for (Arc arc : this.getGraphe().getArcs()) {
-            if (arc.getSource().equals(noeud) && !isSettled(arc.getDestination())) {
+            if (arc.getSource().equals(noeud) && !estInclu(arc.getDestination())) {
                 voisions.add(arc.getDestination());
             }
         }
@@ -87,7 +71,7 @@ public class AlgorithmeDijkstra {
             if (minimum == null) {
                 minimum = noeud;
             } else {
-                if (getShortestDistance(noeud) < getShortestDistance(minimum)) {
+                if (getPlusCourteDistance(noeud) < getPlusCourteDistance(minimum)) {
                     minimum = noeud;
                 }
             }
@@ -95,11 +79,11 @@ public class AlgorithmeDijkstra {
         return minimum;
     }
 
-    private boolean isSettled(Noeud noeud) {
-        return settledNodes.contains(noeud);
+    private boolean estInclu(Noeud noeud) {
+        return noeudsInclus.contains(noeud);
     }
     
-    private int getShortestDistance(Noeud destination) {
+    private int getPlusCourteDistance(Noeud destination) {
         Integer d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;
@@ -108,20 +92,34 @@ public class AlgorithmeDijkstra {
         }
     }
 
-    public LinkedList<Noeud> getchemin(Noeud target) {
+    public LinkedList<Noeud> dessinerChemin(Noeud source, Noeud destination) {
         LinkedList<Noeud> chemin = new LinkedList<Noeud>();
-        Noeud step = target;
-        // check if a chemin exists
-        if (predecessors.get(step) == null) {
+        noeudsInclus = new HashSet<Noeud>();
+        noeudsExclus = new HashSet<Noeud>();
+        distance = new HashMap<Noeud, Integer>();
+        predecesseurs = new HashMap<Noeud, Noeud>();
+        distance.put(source, 0);
+        noeudsExclus.add(source);
+        while (noeudsExclus.size() > 0) {
+            Noeud node = getMinimum(noeudsExclus);
+            noeudsInclus.add(node);
+            noeudsExclus.remove(node);
+            trouverDistanceMinimal(node);
+        }
+        Noeud step = destination;
+        if (predecesseurs.get(step) == null) {
             return null;
         }
         chemin.add(step);
-        while (predecessors.get(step) != null) {
-            step = predecessors.get(step);
+        while (predecesseurs.get(step) != null) {
+            step = predecesseurs.get(step);
             chemin.add(step);
         }
-        // Put it into the correct order
         Collections.reverse(chemin);
         return chemin;
+    }
+    
+    public String plusCourtChemin(Noeud source, Noeud destination) {
+    	return this.dessinerChemin(source, destination).toString();
     }
 }

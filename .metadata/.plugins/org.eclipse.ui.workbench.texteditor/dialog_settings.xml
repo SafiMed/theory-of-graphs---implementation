@@ -2,12 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Noeud" key="selection"/>
+		<item value="chemin" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="path"/>
+			<item value="execute"/>
+			<item value="findMinimalDistances"/>
+			<item value="Main"/>
 			<item value="Vertex"/>
 			<item value="getNeighbors"/>
 			<item value="main"/>
@@ -16,6 +20,8 @@
 			<item value=""/>
 		</list>
 		<list key="replacehistory">
+			<item value="chemin"/>
+			<item value="trouverDistanceMinimal"/>
 			<item value="Noeud"/>
 		</list>
 	</section>
